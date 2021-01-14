@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Proje";
+}
+
+<div class="container mt-3">
+    
+
+
+        <div class="col-6 col-md">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card bg-white border-0">
+                        <div class="card-header bg-dark text-white">TODO</div>
+
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card bg-white border-0">
+                        <div class="card-header bg-dark text-white">TODO</div>
+
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card bg-white border-0">
+                        <div class="card-header bg-dark text-white">TODO</div>
+
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col d-flex justify-content-end">
+            
+            <!--GÖREV EKLEME-->
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Görev Ekle
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Görev Ekleme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container ">
+                                <div class="row ">
+                                    
+                                    <div class="col">
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">E-Mail</span>
+                                            <input type="text" class="form-control" placeholder="E-Mail" aria-label="E-Mail" aria-describedby="basic-addon1">
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Şifre</span>
+                                            <input type="text" class="form-control" placeholder="Şifre" aria-label="Şifre" aria-describedby="basic-addon1">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">E-Mail</span>
+                                            <input type="text" class="form-control" placeholder="E-Mail" aria-label="E-Mail" aria-describedby="basic-addon1">
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Şifre</span>
+                                            <input type="text" class="form-control" placeholder="Şifre" aria-label="Şifre" aria-describedby="basic-addon1">
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-group">
+                                        <span class="input-group-text">Açıklama</span>
+                                        <textarea class="form-control" aria-label="Açıklama"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Ekle</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    
+</div>
+

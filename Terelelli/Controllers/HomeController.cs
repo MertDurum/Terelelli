@@ -13,6 +13,11 @@ namespace Terelelli.Controllers
             return View();
         }
 
+        public ActionResult Proje()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

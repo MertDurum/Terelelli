@@ -1,7 +1,23 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    background-color: rgb(241, 167, 81);
 }
+
+a{
+    color: white !important;
+}
+
+.navbar {
+    /*
+
+    background-color: rgb(105, 72, 33);
+    */
+}
+.card {
+    max-width: 272px;
+}
+
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {

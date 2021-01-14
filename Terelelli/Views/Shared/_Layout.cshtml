@@ -9,6 +9,9 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header>
+        <!--
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Uygulama adı", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Terelelli", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -28,12 +31,51 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    -->
+        <nav class="navbar navbar-expand-md sticky-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Terelelli</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Anasayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hakkında</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Adres</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Giriş Yap</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Kayıt Ol</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid body-content">
         @RenderBody()
+    </div>
+    <div class="container-fluid">
+        <footer style="position: absolute; bottom: 0; width: 100%; height: 60px; ">
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - ASP.NET Uygulamam</p>
+            <p>&copy; @DateTime.Now.Year - Terelelli</p>
         </footer>
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")
