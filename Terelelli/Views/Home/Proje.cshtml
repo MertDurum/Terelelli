@@ -7,20 +7,62 @@
     
 
     <div class="row">
-        <div class="col-lg-10 col-md">
-            <div class="row row-cols-3 row-cols-sm-2 row-cols-md-3 g-2">
-                <div class="col">
-                    <div class="card bg-white border-0 liste">
-                        <div class="card-header bg-dark text-white">TODO</div>
 
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item2</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item3</div>
+        <!--LİSTELER VE GÖREVLER BÖLÜMÜ-->
+        <div class="col-lg-10 col-md">
+            <!--GÖREV LİSTELERİ-->
+            <div class="row g-4 ">
+                <!--Liste-->
+                <div class="col-3">
+                    <div class="card bg-white border-0 liste">
+                        <!--Liste Adı-->
+                        <div class="card-header bg-dark text-white">TODO</div>
+                        <!--Listedeki Görevler-->
+                        <div class="card-body rounded shadow-sm mb-2 border d-flex" draggable="true">
+                            <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            <div class="dropdown">
+                                <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                    <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!---///////////////////////////////////////////////////////////////////////////////--->
+
+                        <div class="card-body rounded shadow-sm mb-2 border d-flex" draggable="true">
+                            <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            <div class="dropdown">
+                                <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                    <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card-body rounded shadow-sm mb-2 border d-flex" draggable="true">
+                            <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            <div class="dropdown">
+                                <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                    <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-3">
                     <div class="card bg-white border-0 liste">
                         <div class="card-header bg-dark text-white">TODO</div>
 
@@ -31,7 +73,18 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-3">
+                    <div class="card bg-white border-0 liste">
+                        <div class="card-header bg-dark text-white">TODO</div>
+
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
+                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
+
+                    </div>
+                </div>
+
+                <div class="col-3">
                     <div class="card bg-white border-0 liste">
                         <div class="card-header bg-dark text-white">TODO</div>
 
@@ -46,7 +99,8 @@
             </div>
         </div>
 
-        <div class="col ">
+        <!--MENÜ BÖLÜMÜ-->
+        <div class="col">
             
             <!--GÖREV EKLEME-->
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -135,6 +189,7 @@
 
 
         </div>
+
     </div>
 </div>
 <script src="~/Scripts/main.js"></script>

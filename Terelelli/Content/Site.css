@@ -1,6 +1,7 @@
 ﻿body {
     padding-bottom: 20px;
-    background-color: rgb(241, 167, 81);
+    /*background-color: rgb(241, 167, 81) !important;*/
+    background-image: url(https://4k-uhd.nl/wp-content/uploads/2018/08/4K-3840x2160-Wallpaper-Uitzicht-3.jpg)
 }
 
 a{
@@ -17,7 +18,16 @@ a{
     max-width: 272px;
 }
 
-
+header{
+    opacity: 0.9;
+}
+footer{
+    opacity: 0.9;
+}
+.btn-check:focus + .btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(128, 128, 128) !important;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -32,7 +42,58 @@ a{
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
+@media screen and (min-width: 1px) {
+    div.terelelli {
+        font-size: 100px !important;
+    }
+}
+@media screen and (min-width: 576px) {
+    div.terelelli {
+        font-size: 100px !important;
+    }
+}
+@media screen and (min-width: 768px) {
+    div.terelelli {
+        font-size: 150px !important;
+    }
+}
+@media screen and (min-width: 992px) {
+    div.terelelli {
+        font-size: 200px !important;
+    }
+}
+@media screen and (min-width: 1200px) {
+    div.terelelli {
+        font-size: 250px !important;
+    }
+}
+@media screen and (min-width: 1400px) {
+    div.terelelli {
+        font-size: 300px !important;
+    }
+}
 
+.testimonial-group > .row {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+    .testimonial-group > .row > .col-3 {
+        display: inline-block;
+    }
+#style-2::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #D62929;
+}
