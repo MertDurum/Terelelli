@@ -13,6 +13,12 @@ namespace Terelelli.Controllers
             return View();
         }
 
+        public ActionResult Profil()
+        {
+            return View();
+        }
+
+
         public ActionResult Proje()
         {
             return View();

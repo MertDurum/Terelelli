@@ -3,193 +3,332 @@
     ViewBag.Title = "Proje";
 }
 
+    <!--MENÜ BÖLÜMÜ-->
 <div class="container mt-3">
-    
+    <div class="row ">
 
-    <div class="row">
+        <div class="card" style="background-color:rgb(128, 128, 128) !important; opacity: 0.4; ">
 
-        <!--LİSTELER VE GÖREVLER BÖLÜMÜ-->
-        <div class="col-lg-10 col-md">
-            <!--GÖREV LİSTELERİ-->
-            <div class="row g-4 ">
-                <!--Liste-->
-                <div class="col-3">
-                    <div class="card bg-white border-0 liste">
-                        <!--Liste Adı-->
-                        <div class="card-header bg-dark text-white">TODO</div>
-                        <!--Listedeki Görevler-->
-                        <div class="card-body rounded shadow-sm mb-2 border d-flex" draggable="true">
-                            <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                    <li><button class="dropdown-item" type="button">Düzenle</button></li>
-                                </ul>
-                            </div>
-                        </div>
+            <div class="col d-inline-block">
+            
+                <button type="button" style="opacity:2;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                    Partner Ekle
+                </button>
 
-                        <!---///////////////////////////////////////////////////////////////////////////////--->
+                <button type="button" style="opacity:1;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Görev Ekle
+                </button>
 
-                        <div class="card-body rounded shadow-sm mb-2 border d-flex" draggable="true">
-                            <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                    <li><button class="dropdown-item" type="button">Düzenle</button></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="card-body rounded shadow-sm mb-2 border d-flex" draggable="true">
-                            <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                    <li><button class="dropdown-item" type="button">Düzenle</button></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="card bg-white border-0 liste">
-                        <div class="card-header bg-dark text-white">TODO</div>
-
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
-
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="card bg-white border-0 liste">
-                        <div class="card-header bg-dark text-white">TODO</div>
-
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
-
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="card bg-white border-0 liste">
-                        <div class="card-header bg-dark text-white">TODO</div>
-
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                        <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-
-                    </div>
-                </div>
-
+                <button type="button" style="opacity:1;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                    Liste Ekle
+                </button>
 
             </div>
         </div>
 
-        <!--MENÜ BÖLÜMÜ-->
-        <div class="col">
-            
-            <!--GÖREV EKLEME-->
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Görev Ekle
-            </button>
+        <!--Görev Ekleme Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Görev Ekleme</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Görev Ekleme</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+                    <div class="modal-body">
+                        <div class="container ">
+                            <div class="row ">
 
-                        <div class="modal-body">
-                            <div class="container ">
-                                <div class="row ">
+                                <div class="col">
 
-                                    <div class="col">
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Kart No</span>
-                                            <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Proje No</span>
-                                            <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
-                                            <input type="text" class="form-control" aria-label="Teknik_Uzman" aria-describedby="basic-addon1">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col">
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Tarih</span>
-                                            <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
-                                            <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
-                                            <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1">
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Açıklama</span>
-                                        <textarea class="form-control" aria-label="Açıklama"></textarea>
+                                        <span class="input-group-text" id="basic-addon1">Kart No</span>
+                                        <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
                                     </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Proje No</span>
+                                        <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
+                                        <input type="text" class="form-control" aria-label="Teknik_Uzman" aria-describedby="basic-addon1">
+                                    </div>
+
                                 </div>
 
-                                <div class="row">
+                                <div class="col">
+
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Not</span>
-                                        <textarea class="form-control" aria-label="Not"></textarea>
+                                        <span class="input-group-text" id="basic-addon1">Tarih</span>
+                                        <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1">
                                     </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
+                                        <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
+                                        <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1">
+                                    </div>
+
                                 </div>
+
 
                             </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Görevi Ekle</button>
-                        </div>
+                            <div class="row">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Açıklama</span>
+                                    <textarea class="form-control" aria-label="Açıklama"></textarea>
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Not</span>
+                                    <textarea class="form-control" aria-label="Not"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Görevi Ekle</button>
+                    </div>
+
                 </div>
             </div>
+        </div>
 
+        <!--Partner Ekleme Modal-->
+        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Partner Davet Etme</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container ">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Partner Kodu Giriniz</span>
+                                        <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Partner Davet Et</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Liste Ekleme Modal-->
+        <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Liste Ekleme</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container ">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Liste Adı Giriniz</span>
+                                        <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Liste Ekle</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
+</div>
+
+        <!--LİSTELER VE GÖREVLER BÖLÜMÜ-->
+<div class="container-fluid mt-3">
+
+            <!--GÖREV LİSTELERİ-->
+    <div class="row g-4 testimonial-group">
+
+        <!--LİSTE-->
+        <div class="col-3">
+            <div class="card bg-white border-0 liste shadow">
+
+                <!--Liste Adı / Header-->
+                <div class="card-header shadow bg-dark text-white d-inline-flex mb-1">
+                    TODO
+                    <div class="dropdown" style="position:absolute; right:0; top:0;">
+
+                        <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><button class="dropdown-item" type="button">Listeyi Sil</button></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <!--Listedeki Görevler-->
+                <div>
+
+                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
+
+                        <div class="dropdown">
+                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
+
+                        <div class="dropdown">
+                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
+
+                        <div class="dropdown">
+                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
+
+                        <div class="dropdown">
+                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!---///////////////////////////////////////////////////////////////////////////////--->
+        
+    <!--Bunlar sâfi rüzgar .. bunları sil-->
+        <div class="col-3">
+            <div class="card bg-white border-0 liste shadow-lg">
+                <div class="card-header bg-dark text-white">TODO</div>
+
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
+
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-white border-0 liste shadow-lg">
+                <div class="card-header bg-dark text-white">TODO</div>
+
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
+
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-white border-0 liste">
+                <div class="card-header bg-dark text-white">TODO</div>
+
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-white border-0 liste">
+                <div class="card-header bg-dark text-white">TODO</div>
+
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-white border-0 liste">
+                <div class="card-header bg-dark text-white">TODO</div>
+
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-white border-0 liste">
+                <div class="card-header bg-dark text-white">TODO</div>
+
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
+
+            </div>
+        </div>
+
+
+    </div>
+    
 </div>
 <script src="~/Scripts/main.js"></script>
