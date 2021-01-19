@@ -60,12 +60,22 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Giriş Yap</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Kayıt Ol</a>
-                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Giriş Yap</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Kayıt Ol</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="Logout">Çıkış Yap</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

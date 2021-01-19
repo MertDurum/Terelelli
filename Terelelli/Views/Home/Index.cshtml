@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Terelelli.Models.Entity.User
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,7 +10,6 @@
             <div class="terelelli" style="font-family: Brush Script MT;font-size:200px">Terelelli</div>
         </div>
     </div>
-
     <div class="row text-center">
         <div class="col">
 
@@ -21,27 +22,32 @@
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Giriş Yap</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Giriş Yap</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
 
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">E-Mail</span>
-                                    <input type="text" class="form-control" placeholder="E-Mail" aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Şifre</span>
-                                    <input type="text" class="form-control" placeholder="Şifre" aria-label="Username" aria-describedby="basic-addon1">
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">E-Mail</span>
+                                        @*<input type="text" class="form-control" placeholder="E-Mail" aria-label="Username" aria-describedby="basic-addon1">*@
+                                        @Html.TextBoxFor(m => m.username)
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Şifre</span>
+                                        @*<input type="text" class="form-control" placeholder="Şifre" aria-label="Username" aria-describedby="basic-addon1">*@
+                                        @Html.TextBoxFor(m => m.password)
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Giriş Yap</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-dark">Giriş Yap</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
