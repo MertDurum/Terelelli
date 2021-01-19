@@ -112,3 +112,8 @@ footer{
     color: #0d6efd;
     text-decoration:none !important;
 }
+
+.proje > .card {
+    background-color: rgba(128, 128, 128, 0.8);
+
+}

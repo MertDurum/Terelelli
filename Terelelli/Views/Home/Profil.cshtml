@@ -3,5 +3,202 @@
     ViewBag.Title = "Profil";
 }
 
-<h2>Profil</h2>
+<div class="container-fluid mt-lg-3 mt-md-3 mt-sm-2">
+    
+    <!--Menü-->
+    <div class="row">
+
+        <div class="container mt-3">
+            <div class="row proje">
+
+                <div class="card">
+
+                    <div class="col d-inline-block">
+
+                        <button type="button" style="opacity:0.8;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                            Partner Ekle
+                        </button>
+
+                        <button type="button" style="opacity:0.8;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Görev Ekle
+                        </button>
+
+                    </div>
+                </div>
+
+                <!--Görev Ekleme Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Görev Ekleme</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container ">
+                                    <div class="row ">
+
+                                        <div class="col">
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Kart No</span>
+                                                <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Proje No</span>
+                                                <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
+                                                <input type="text" class="form-control" aria-label="Teknik_Uzman" aria-describedby="basic-addon1">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col">
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Tarih</span>
+                                                <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
+                                                <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1">
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
+                                                <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1">
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Açıklama</span>
+                                            <textarea class="form-control" aria-label="Açıklama"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Not</span>
+                                            <textarea class="form-control" aria-label="Not"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Görevi Ekle</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--Partner Ekleme Modal-->
+                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Partner Davet Etme</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container ">
+                                    <div class="row ">
+                                        <div class="col">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Partner Kodu Giriniz</span>
+                                                <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Partner Davet Et</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--Liste Ekleme Modal-->
+                <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Liste Ekleme</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container ">
+                                    <div class="row ">
+                                        <div class="col">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Liste Adı Giriniz</span>
+                                                <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Liste Ekle</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>   
+    </div>
+
+    <!--Projeler-->
+    <div class="row mt-lg-3 mt-md-3 mt-sm-2 proje">
+        <h4>Projeler</h4>
+        <div class="card m-1" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">*Proje Adı*</h5>
+                <p class="card-text">*Proje Açıklaması*</p>
+                <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a>
+            </div>
+        </div>
+
+        <div class="card m-1" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">*Proje Adı*</h5>
+                <p class="card-text">*Proje Açıklaması*</p>
+                <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a>
+            </div>
+        </div>
+
+        <div class="card m-1" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">*Proje Adı*</h5>
+                <p class="card-text">*Proje Açıklaması*</p>
+                <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a> 
+            </div>
+        </div>
+
+    </div>
+</div>
 
