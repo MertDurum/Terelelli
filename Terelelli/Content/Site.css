@@ -6,6 +6,7 @@
 
 a{
     color: white !important;
+    text-decoration: none !important;
 }
 
 .navbar {
@@ -117,3 +118,4 @@ footer{
     background-color: rgba(128, 128, 128, 0.8);
 
 }
+

@@ -18,7 +18,10 @@ namespace Terelelli.Controllers
             return View();
         }
 
-
+        public ActionResult Kayıt()
+        {
+            return View();
+        }
         public ActionResult Proje()
         {
             return View();

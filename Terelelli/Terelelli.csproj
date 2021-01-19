@@ -1905,6 +1905,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Proje.cshtml" />
     <Content Include="Views\Home\Profil.cshtml" />
+    <Content Include="Views\Home\Kayıt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
