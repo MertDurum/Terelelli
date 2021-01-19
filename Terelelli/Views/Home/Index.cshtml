@@ -47,11 +47,11 @@
             </div>
 
 
-            <!--KAYIT OL Button trigger modal -->
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Kayıt Ol
+            <!--KAYIT OL Button trigger modal-->
+            <button type="button" class="btn btn-dark">
+                @Html.ActionLink("Kayıt Ol", "Kayıt", "Home")
             </button>
-
+            <!--<a class="btn btn-dark" role="button">@Html.ActionLink("Kayıt Ol", "Kayıt", "Home")</a>-->
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -80,6 +80,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
