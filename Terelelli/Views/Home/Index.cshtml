@@ -34,7 +34,7 @@
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">E-Mail</span>
                                         @*<input type="text" class="form-control" placeholder="E-Mail" aria-label="Username" aria-describedby="basic-addon1">*@
-                                        @Html.TextBoxFor(m => m.username)
+                                        @Html.TextBoxFor(m => m.email)
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">Şifre</span>
@@ -55,9 +55,9 @@
 
             <!--KAYIT OL Button trigger modal-->
             <button type="button" class="btn btn-dark">
-                @Html.ActionLink("Kayıt Ol", "Kayıt", "Home")
+                @Html.ActionLink("Kayıt Ol", "Register", "Home")
             </button>
-            <!--<a class="btn btn-dark" role="button">@Html.ActionLink("Kayıt Ol", "Kayıt", "Home")</a>-->
+            <!--<a class="btn btn-dark" role="button">@Html.ActionLink("Kayıt Ol", "Register", "Home")</a>-->
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">

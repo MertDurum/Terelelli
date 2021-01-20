@@ -1971,6 +1971,7 @@
     <Content Include="Views\Home\Proje.cshtml" />
     <Content Include="Views\Home\Profil.cshtml" />
     <Content Include="Views\Home\Kayıt.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
