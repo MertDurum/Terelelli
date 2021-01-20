@@ -1,6 +1,8 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
+    @Html.Action("Index", "Layout")
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +39,7 @@
     -->
         <nav class="navbar navbar-expand-md navbar-fixed-top sticky-top bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Terelelli</a>
+                <a class="navbar-brand" href=@Url.Action("Index", "Home")>Terelelli</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                     
@@ -47,13 +49,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Anasayfa</a>
+                            <a class="nav-link active" aria-current="page" href=@Url.Action("Index", "Home")>Anasayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hakkında</a>
+                            <a class="nav-link" href=@Url.Action("About", "Home")>Hakkında</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Adres</a>
+                            <a class="nav-link" href=@Url.Action("Contact", "Home")>Adres</a>
                         </li>
                     </ul>
                 </div>
@@ -63,17 +65,19 @@
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Giriş Yap</a>
+                                <a class="nav-link" href=@Url.Action("Index", "Home")>Giriş Yap</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Kayıt Ol</a>
+                                <a class="nav-link" href=@Url.Action("Register", "Home")>Kayıt Ol</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-
-                                <a class="nav-link" href="Logout">Çıkış Yap</a>
+                                <a class="nav-link" href=@Url.Action("Profil", "Home")>@TempData["Username"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Logout", "Home")>Çıkış Yap</a>
                             </li>
                         }
                     </ul>

@@ -18,14 +18,14 @@ namespace Terelelli.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(User _user)
+        public ActionResult Index(Users _user)
         {
-            var u = db.Users.FirstOrDefault(x => x.UserMail == _user.email && x.UserPassword == _user.password);
+            var u = db.Users.FirstOrDefault(x => x.UserMail == _user.UserMail && x.UserPassword == _user.UserPassword);
 
             if (u != null)
             {
                 // Login
-                FormsAuthentication.SetAuthCookie(u.UserName, false);
+                FormsAuthentication.SetAuthCookie(u.UserId.ToString(), false);
                 return RedirectToAction("Profil");
             }
             else
@@ -48,15 +48,15 @@ namespace Terelelli.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User _user)
+        public ActionResult Register(Users _user)
         {
-            if (String.IsNullOrEmpty(_user.email) || String.IsNullOrEmpty(_user.name) || String.IsNullOrEmpty(_user.password))
+            if (String.IsNullOrEmpty(_user.UserMail) || String.IsNullOrEmpty(_user.UserName) || String.IsNullOrEmpty(_user.UserPassword))
             {
                 ViewBag.Message = "Lütfen istenilen bilgileri giriniz.";
             }
             else
             {
-                var u = db.Users.FirstOrDefault(x => x.UserMail == _user.email);
+                var u = db.Users.FirstOrDefault(x => x.UserMail == _user.UserMail);
 
                 if (u != null)
                 {
@@ -65,7 +65,7 @@ namespace Terelelli.Controllers
                 }
                 else
                 {
-                    Users newUser = new Users() { UserMail = _user.email, UserName = _user.name, UserPassword = _user.password };
+                    Users newUser = new Users() { UserMail = _user.UserMail, UserName = _user.UserName, UserPassword = _user.UserPassword};
                     db.Users.Add(newUser);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -95,10 +95,21 @@ namespace Terelelli.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreateProject(Projects _project)
+        {
+            _project.ProjectAuthorId = db.Users.FirstOrDefault(x => x.UserId == Convert.ToInt32(User.Identity.Name)).UserId;
+            db.Projects.Add(_project);
+            db.SaveChanges();
+            return RedirectToAction("Profil");
         }
     }
 }
