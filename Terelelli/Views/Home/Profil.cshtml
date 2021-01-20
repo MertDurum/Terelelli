@@ -1,4 +1,5 @@
-﻿
+﻿@model Terelelli.Models.Entity.Projects
+
 @{
     ViewBag.Title = "Profil";
 }
@@ -30,29 +31,31 @@
                 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
+                            @using (Html.BeginForm("CreateProject", "Home", FormMethod.Post))
+                            {
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Proje Oluştur</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
 
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Liste Ekleme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-
-                            <div class="modal-body">
-                                <div class="container ">
-                                    <div class="row ">
-                                        <div class="col">
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Proje Adı</span>
-                                                <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                <div class="modal-body">
+                                    <div class="container ">
+                                        <div class="row ">
+                                            <div class="col">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">Proje Adı</span>
+                                                    @*<input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">*@
+                                                    @Html.TextBoxFor(m => m.ProjectName);
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Liste Ekle</button>
-                            </div>
-
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-dark">Proje Oluştur</button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

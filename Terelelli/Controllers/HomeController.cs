@@ -106,7 +106,7 @@ namespace Terelelli.Controllers
         [HttpPost]
         public ActionResult CreateProject(Projects _project)
         {
-            _project.ProjectAuthorId = db.Users.FirstOrDefault(x => x.UserId == Convert.ToInt32(User.Identity.Name)).UserId;
+            _project.ProjectAuthorId = db.Users.FirstOrDefault(x => x.UserId.ToString() == User.Identity.Name).UserId;
             db.Projects.Add(_project);
             db.SaveChanges();
             return RedirectToAction("Profil");
