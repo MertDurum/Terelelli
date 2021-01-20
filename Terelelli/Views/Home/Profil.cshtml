@@ -64,29 +64,31 @@
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
+                            @using (Html.BeginForm("JoinProject", "Home", FormMethod.Post))
+                            {
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Partner Davet Etme</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
 
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Partner Davet Etme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-
-                            <div class="modal-body">
-                                <div class="container ">
-                                    <div class="row ">
-                                        <div class="col">
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Partner Kodu Giriniz</span>
-                                                <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                                <div class="modal-body">
+                                    <div class="container ">
+                                        <div class="row ">
+                                            <div class="col">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">Proje Kodu Giriniz</span>
+                                                    @*<input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">*@
+                                                    @Html.TextBoxFor(m => m.ProjectId);
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Partner Davet Et</button>
-                            </div>
-
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-dark">Projeye Katıl</button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -108,7 +110,8 @@
                 <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a>
             </div>
         </div>
-
+        
+        @*  
         <div class="card m-1" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">*Proje Adı*</h5>
@@ -124,6 +127,7 @@
                 <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a> 
             </div>
         </div>
+        *@
 
     </div>
 </div>

@@ -107,8 +107,39 @@ namespace Terelelli.Controllers
         public ActionResult CreateProject(Projects _project)
         {
             _project.ProjectAuthorId = db.Users.FirstOrDefault(x => x.UserId.ToString() == User.Identity.Name).UserId;
+            _project.ProjectStartDate = DateTime.Now;
             db.Projects.Add(_project);
             db.SaveChanges();
+
+            ProjectUsers PU = new ProjectUsers() { ProjectId = _project.ProjectId, UserId = Convert.ToInt32(User.Identity.Name) };
+            db.ProjectUsers.Add(PU);
+            db.SaveChanges();
+
+            return RedirectToAction("Profil");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult JoinProject(Projects _project)
+        {
+            var p = db.Projects.FirstOrDefault(x => x.ProjectId == _project.ProjectId);
+            
+            // if project exists => add the user to the projectusers relationship table
+            if (p != null)
+            {
+                // if user is not a nember of this project, add them
+                var pu = db.ProjectUsers.FirstOrDefault(x => x.ProjectId == _project.ProjectId && x.UserId.ToString() == User.Identity.Name);
+
+                if (pu == null)
+                {
+                    pu = new ProjectUsers() { ProjectId = _project.ProjectId, UserId = Convert.ToInt32(User.Identity.Name) };
+                    db.ProjectUsers.Add(pu);
+                    db.SaveChanges();
+                }
+
+                // then redirect the user to the project page.
+                return RedirectToAction("Proje");
+            }
             return RedirectToAction("Profil");
         }
     }
