@@ -10,7 +10,7 @@ namespace Terelelli.Controllers
 {
     public class HomeController : Controller
     {
-        TaskBoardEntities6 db = new TaskBoardEntities6();
+        TaskBoardEntities7 db = new TaskBoardEntities7();
 
         public ActionResult Index()
         {

@@ -18,6 +18,7 @@ namespace Terelelli.Models.Entity
         public Projects()
         {
             this.Panels = new HashSet<Panels>();
+            this.ProjectUsers = new HashSet<ProjectUsers>();
         }
     
         public int ProjectId { get; set; }
@@ -28,5 +29,7 @@ namespace Terelelli.Models.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Panels> Panels { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectUsers> ProjectUsers { get; set; }
     }
 }

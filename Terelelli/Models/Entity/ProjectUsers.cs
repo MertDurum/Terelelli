@@ -12,22 +12,13 @@ namespace Terelelli.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Panels
+    public partial class ProjectUsers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Panels()
-        {
-            this.Tasks = new HashSet<Tasks>();
-        }
-    
-        public int PanelId { get; set; }
+        public int Id { get; set; }
         public Nullable<int> ProjectId { get; set; }
-        public int PanelAuthorId { get; set; }
-        public string PanelName { get; set; }
+        public Nullable<int> UserId { get; set; }
     
         public virtual Projects Projects { get; set; }
         public virtual Users Users { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tasks> Tasks { get; set; }
     }
 }

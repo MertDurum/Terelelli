@@ -5,6 +5,72 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="TaskBoardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Panels">
+          <Key>
+            <PropertyRef Name="PanelId" />
+          </Key>
+          <Property Name="PanelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="PanelAuthorId" Type="int" Nullable="false" />
+          <Property Name="PanelName" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectAuthorId" Type="int" />
+          <Property Name="ProjectStartDate" Type="datetime" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="32" />
+          <Property Name="ProjectDifficulty" Type="smallint" />
+        </EntityType>
+        <EntityType Name="ProjectUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TaskCompletionTimes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="CompletionTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PanelId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TaskStartDate" Type="datetime" />
+          <Property Name="TaskDescription" Type="nvarchar" MaxLength="256" />
+          <Property Name="TaskNotes" Type="nvarchar" MaxLength="256" />
+          <Property Name="TaskDifficulty" Type="smallint" />
+        </EntityType>
+        <EntityType Name="TaskTimes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="NormalizedTaskTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -14,14 +80,244 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="16" />
           <Property Name="UserPassword" Type="nvarchar" MaxLength="32" />
         </EntityType>
+        <Association Name="FK_Panels_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Panels" Type="Self.Panels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Panels">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Panels_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Panels" Type="Self.Panels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Panels">
+              <PropertyRef Name="PanelAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUsers_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskCompletionTimes_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+          <End Role="TaskCompletionTimes" Type="Self.TaskCompletionTimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskCompletionTimes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskCompletionTimes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TaskCompletionTimes" Type="Self.TaskCompletionTimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskCompletionTimes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Panels">
+          <End Role="Panels" Type="Self.Panels" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Panels">
+              <PropertyRef Name="PanelId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="PanelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskTimes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TaskTimes" Type="Self.TaskTimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskTimes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TaskBoardModelStoreContainer">
+          <EntitySet Name="Panels" EntityType="Self.Panels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskCompletionTimes" EntityType="Self.TaskCompletionTimes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskTimes" EntityType="Self.TaskTimes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Panels_Projects" Association="Self.FK_Panels_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Panels" EntitySet="Panels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Panels_Users" Association="Self.FK_Panels_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Panels" EntitySet="Panels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUsers_Projects" Association="Self.FK_ProjectUsers_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUsers_Users" Association="Self.FK_ProjectUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskCompletionTimes_Tasks" Association="Self.FK_TaskCompletionTimes_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskCompletionTimes" EntitySet="TaskCompletionTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskCompletionTimes_Users" Association="Self.FK_TaskCompletionTimes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskCompletionTimes" EntitySet="TaskCompletionTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Panels" Association="Self.FK_Tasks_Panels">
+            <End Role="Panels" EntitySet="Panels" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Users" Association="Self.FK_Tasks_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskTimes_Users" Association="Self.FK_TaskTimes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskTimes" EntitySet="TaskTimes" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TaskBoardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Panels">
+          <Key>
+            <PropertyRef Name="PanelId" />
+          </Key>
+          <Property Name="PanelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="PanelAuthorId" Type="Int32" Nullable="false" />
+          <Property Name="PanelName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Panels_Projects" FromRole="Panels" ToRole="Projects" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Panels_Users" FromRole="Panels" ToRole="Users" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Panels" FromRole="Panels" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectAuthorId" Type="Int32" />
+          <Property Name="ProjectStartDate" Type="DateTime" Precision="3" />
+          <Property Name="ProjectName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectDifficulty" Type="Int16" />
+          <NavigationProperty Name="Panels" Relationship="Self.FK_Panels_Projects" FromRole="Projects" ToRole="Panels" />
+          <NavigationProperty Name="ProjectUsers" Relationship="Self.FK_ProjectUsers_Projects" FromRole="Projects" ToRole="ProjectUsers" />
+        </EntityType>
+        <EntityType Name="ProjectUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectUsers_Projects" FromRole="ProjectUsers" ToRole="Projects" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_ProjectUsers_Users" FromRole="ProjectUsers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaskCompletionTimes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="CompletionTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_TaskCompletionTimes_Tasks" FromRole="TaskCompletionTimes" ToRole="Tasks" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_TaskCompletionTimes_Users" FromRole="TaskCompletionTimes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PanelId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TaskStartDate" Type="DateTime" Precision="3" />
+          <Property Name="TaskDescription" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="TaskNotes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="TaskDifficulty" Type="Int16" />
+          <NavigationProperty Name="Panels" Relationship="Self.FK_Tasks_Panels" FromRole="Tasks" ToRole="Panels" />
+          <NavigationProperty Name="TaskCompletionTimes" Relationship="Self.FK_TaskCompletionTimes_Tasks" FromRole="Tasks" ToRole="TaskCompletionTimes" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Tasks_Users" FromRole="Tasks" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TaskTimes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="NormalizedTaskTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_TaskTimes_Users" FromRole="TaskTimes" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -30,16 +326,245 @@
           <Property Name="UserMail" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="UserPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Panels" Relationship="Self.FK_Panels_Users" FromRole="Users" ToRole="Panels" />
+          <NavigationProperty Name="ProjectUsers" Relationship="Self.FK_ProjectUsers_Users" FromRole="Users" ToRole="ProjectUsers" />
+          <NavigationProperty Name="TaskCompletionTimes" Relationship="Self.FK_TaskCompletionTimes_Users" FromRole="Users" ToRole="TaskCompletionTimes" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Users" FromRole="Users" ToRole="Tasks" />
+          <NavigationProperty Name="TaskTimes" Relationship="Self.FK_TaskTimes_Users" FromRole="Users" ToRole="TaskTimes" />
         </EntityType>
-        <EntityContainer Name="TaskBoardEntities6" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Panels_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Panels" Type="Self.Panels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Panels">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Panels_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Panels" Type="Self.Panels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Panels">
+              <PropertyRef Name="PanelAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Panels">
+          <End Role="Panels" Type="Self.Panels" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Panels">
+              <PropertyRef Name="PanelId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="PanelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUsers_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskCompletionTimes_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+          <End Role="TaskCompletionTimes" Type="Self.TaskCompletionTimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskCompletionTimes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskCompletionTimes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TaskCompletionTimes" Type="Self.TaskCompletionTimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskCompletionTimes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskTimes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TaskTimes" Type="Self.TaskTimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskTimes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TaskBoardEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Panels" EntityType="Self.Panels" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUsers" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TaskCompletionTimes" EntityType="Self.TaskCompletionTimes" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" />
+          <EntitySet Name="TaskTimes" EntityType="Self.TaskTimes" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Panels_Projects" Association="Self.FK_Panels_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Panels" EntitySet="Panels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Panels_Users" Association="Self.FK_Panels_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Panels" EntitySet="Panels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Panels" Association="Self.FK_Tasks_Panels">
+            <End Role="Panels" EntitySet="Panels" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUsers_Projects" Association="Self.FK_ProjectUsers_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUsers_Users" Association="Self.FK_ProjectUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskCompletionTimes_Tasks" Association="Self.FK_TaskCompletionTimes_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskCompletionTimes" EntitySet="TaskCompletionTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskCompletionTimes_Users" Association="Self.FK_TaskCompletionTimes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskCompletionTimes" EntitySet="TaskCompletionTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Users" Association="Self.FK_Tasks_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskTimes_Users" Association="Self.FK_TaskTimes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TaskTimes" EntitySet="TaskTimes" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TaskBoardModelStoreContainer" CdmEntityContainer="TaskBoardEntities6">
+        <EntityContainerMapping StorageEntityContainer="TaskBoardModelStoreContainer" CdmEntityContainer="TaskBoardEntities7">
+          <EntitySetMapping Name="Panels">
+            <EntityTypeMapping TypeName="TaskBoardModel.Panels">
+              <MappingFragment StoreEntitySet="Panels">
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="PanelAuthorId" ColumnName="PanelAuthorId" />
+                <ScalarProperty Name="PanelName" ColumnName="PanelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="TaskBoardModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectAuthorId" ColumnName="ProjectAuthorId" />
+                <ScalarProperty Name="ProjectStartDate" ColumnName="ProjectStartDate" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectDifficulty" ColumnName="ProjectDifficulty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectUsers">
+            <EntityTypeMapping TypeName="TaskBoardModel.ProjectUsers">
+              <MappingFragment StoreEntitySet="ProjectUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TaskBoardModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskCompletionTimes">
+            <EntityTypeMapping TypeName="TaskBoardModel.TaskCompletionTimes">
+              <MappingFragment StoreEntitySet="TaskCompletionTimes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TaskBoardModel.Tasks">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TaskStartDate" ColumnName="TaskStartDate" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="TaskNotes" ColumnName="TaskNotes" />
+                <ScalarProperty Name="TaskDifficulty" ColumnName="TaskDifficulty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskTimes">
+            <EntityTypeMapping TypeName="TaskBoardModel.TaskTimes">
+              <MappingFragment StoreEntitySet="TaskTimes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NormalizedTaskTime" ColumnName="NormalizedTaskTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TaskBoardModel.Users">
               <MappingFragment StoreEntitySet="Users">

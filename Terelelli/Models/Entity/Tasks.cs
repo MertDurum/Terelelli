@@ -14,6 +14,12 @@ namespace Terelelli.Models.Entity
     
     public partial class Tasks
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tasks()
+        {
+            this.TaskCompletionTimes = new HashSet<TaskCompletionTimes>();
+        }
+    
         public int TaskId { get; set; }
         public Nullable<int> PanelId { get; set; }
         public Nullable<int> UserId { get; set; }
@@ -23,5 +29,8 @@ namespace Terelelli.Models.Entity
         public Nullable<short> TaskDifficulty { get; set; }
     
         public virtual Panels Panels { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskCompletionTimes> TaskCompletionTimes { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

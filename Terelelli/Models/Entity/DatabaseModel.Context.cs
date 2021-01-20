@@ -13,10 +13,10 @@ namespace Terelelli.Models.Entity
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TaskBoardEntities6 : DbContext
+    public partial class TaskBoardEntities7 : DbContext
     {
-        public TaskBoardEntities6()
-            : base("name=TaskBoardEntities6")
+        public TaskBoardEntities7()
+            : base("name=TaskBoardEntities7")
         {
         }
     
@@ -25,6 +25,13 @@ namespace Terelelli.Models.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Panels> Panels { get; set; }
+        public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<ProjectUsers> ProjectUsers { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TaskCompletionTimes> TaskCompletionTimes { get; set; }
+        public virtual DbSet<Tasks> Tasks { get; set; }
+        public virtual DbSet<TaskTimes> TaskTimes { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

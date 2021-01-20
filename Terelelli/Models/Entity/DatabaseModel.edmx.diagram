@@ -4,8 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dfec81db5bbc47568d69ab73faf94b30" Name="Diagram1">
-        <EntityTypeShape EntityType="TaskBoardModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="a5e95b674af643d88ea0be47e1f831e7" Name="Diagram1">
+        <EntityTypeShape EntityType="TaskBoardModel.Panels" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.Projects" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.ProjectUsers" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.TaskCompletionTimes" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.Tasks" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.TaskTimes" Width="1.5" PointX="1" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskBoardModel.Users" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="TaskBoardModel.FK_Panels_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_Panels_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_Tasks_Panels" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_ProjectUsers_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_ProjectUsers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_TaskCompletionTimes_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_TaskCompletionTimes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_Tasks_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskBoardModel.FK_TaskTimes_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
