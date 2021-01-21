@@ -2,217 +2,189 @@
 
 @{
     ViewBag.Title = "Proje";
+    Terelelli.Models.Entity.ProjectPage data = new Terelelli.Models.Entity.ProjectPage();
 }
 
     <!--MENÜ BÖLÜMÜ-->
 <div class="container mt-3">
     <div class="row proje">
-
-        <div class="card" >
-
+        <div class="card">
             <div class="col d-inline-block">
-            
-                <button type="button" style="opacity:0.8;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-                    Partner Ekle
+                <button type="button" style="opacity:0.8;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                    Pano Ekle
                 </button>
 
                 <button type="button" style="opacity:0.8;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Görev Ekle
                 </button>
-
-                <button type="button" style="opacity:0.8;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
-                    Liste Ekle
-                </button>
-
             </div>
         </div>
 
-        <!--Görev Ekleme Modal -->
+        <!--Görev Ekleme Modal-->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Görev Ekleme</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="container ">
-                            <div class="row ">
-
-                                <div class="col">
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Kart No</span>
-                                        <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Proje No</span>
-                                        <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1">
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
-                                        <input type="text" class="form-control" aria-label="Teknik_Uzman" aria-describedby="basic-addon1">
-                                    </div>
-
-                                </div>
-
-                                <div class="col">
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Tarih</span>
-                                        <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1">
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
-                                        <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1">
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
-                                        <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1">
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                            <div class="row">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Açıklama</span>
-                                    <textarea class="form-control" aria-label="Açıklama"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Not</span>
-                                    <textarea class="form-control" aria-label="Not"></textarea>
-                                </div>
-                            </div>
-
+                    @using (Html.BeginForm("CreateTask", "Home", FormMethod.Post))
+                    {
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Görev Ekleme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Görevi Ekle</button>
-                    </div>
+                        <div class="modal-body">
+                            <div class="container ">
+                                <div class="row ">
+                                    <div class="col">
 
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Kart No</span>
+                                            <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1" disabled>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Proje No</span>
+                                            <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1" value=@ViewBag.projectId disabled>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
+                                            @*<input type="text" class="form-control" aria-label="Teknik_Uzman" aria-describedby="basic-addon1">*@
+                                            @Html.TextBoxFor(m => m.tasks.UserId, new { required = true })
+                                            @Html.HiddenFor(m => m.projects.ProjectId, new { Value = ViewBag.projectId })
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Tarih</span>
+                                            <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1" value=@DateTime.Now disabled>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
+                                            <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1" disabled>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
+                                            <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1" disabled>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Açıklama</span>
+                                        @*<textarea class="form-control" aria-label="Açıklama"></textarea>*@
+                                        @Html.TextAreaFor(m => m.tasks.TaskDescription, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Not</span>
+                                        @*<textarea class="form-control" aria-label="Not"></textarea>*@
+                                        @Html.TextAreaFor(m => m.tasks.TaskNotes, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark">Görevi Ekle</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
 
-        <!--Partner Ekleme Modal-->
-        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Partner Davet Etme</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="container ">
-                            <div class="row ">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Partner Kodu Giriniz</span>
-                                        <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Partner Davet Et</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!--Liste Ekleme Modal-->
+        <!--Pano Ekleme Modal-->
         <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
+                    @using (Html.BeginForm("CreatePanel", "Home", FormMethod.Post))
+                    {
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Pano Ekleme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Liste Ekleme</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="container ">
-                            <div class="row ">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">Liste Adı Giriniz</span>
-                                        <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">
+                        <div class="modal-body">
+                            <div class="container ">
+                                <div class="row ">
+                                    <div class="col">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Pano Adı Giriniz</span>
+                                            @Html.TextBoxFor(m => m.panels.PanelName)
+                                            @Html.HiddenFor(m => m.projects.ProjectId, new { Value = ViewBag.projectId })
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Liste Ekle</button>
-                    </div>
-
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark">Görev Ekle</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
-        <!--LİSTELER VE GÖREVLER BÖLÜMÜ-->
+        <!--PANOLAR VE GÖREVLER BÖLÜMÜ-->
 <div class="container-fluid mt-3">
 
-            <!--GÖREV LİSTELERİ-->
+            <!--PANOLAR-->
     <div class="row g-4 testimonial-group">
+        @foreach (var p in data.ProjectPanels(ViewBag.projectId))
+        {
+            Terelelli.Models.Entity.Panels currentPanel = p;
+            <!--Pano-->
+            <div class="col-3">
+                <div class="card bg-white border-0 liste shadow">
+                    <!--Pano Adı-->
+                    <div class="card-header shadow bg-dark text-white d-inline-flex mb-1">
+                        @p.PanelName
+                        <div class="dropdown" style="position:absolute; right:0; top:0;">
 
-        <!--LİSTE-->
-        <div class="col-3">
-            <div class="card bg-white border-0 liste shadow">
-                <!--Liste Adı / Header-->
-                <div class="card-header shadow bg-dark text-white d-inline-flex mb-1">
-                    TODO
-                    <div class="dropdown" style="position:absolute; right:0; top:0;">
-
-                        <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><button class="dropdown-item" type="button">Listeyi Sil</button></li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <!--Listedeki Görevler-->
-                <div>
-                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
-                        <div class="dropdown">
-                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
+                            <button class="btn btn-link text-reset ms-auto" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><button class="dropdown-item" type="button" onclick="location.href = '@Url.Action("DeletePanel", "Home", new { _panelId = p.PanelId })'">Panoyu Sil</button></li>
                             </ul>
+
                         </div>
                     </div>
+                    @foreach(var t in data.PanelTasks(currentPanel.PanelId.ToString()))
+                    {
+                        <!--Panodaki Görevler-->
+                        <div>
+                            <div class="card-body rounded shadow m-1 border" draggable="true">
+                                <div class="dropdown">
+                                    <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div>@t.TaskDescription</div>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                        <li><button class="dropdown-item" type="button" onclick="location.href = '@Url.Action("DeleteTask", "Home", new { _taskId = t.TaskId })'">Sil</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
+        }
     </div>
     
 </div>

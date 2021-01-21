@@ -86,7 +86,7 @@ namespace Terelelli.Controllers
             if (p == null)
                 return RedirectToAction("Profil");
 
-            ViewBag.text = id.ToString();
+            ViewBag.projectId = id.ToString();
             return View();
         }
 
@@ -150,6 +150,64 @@ namespace Terelelli.Controllers
                 return RedirectToAction("Proje");
             }
             return RedirectToAction("Profil");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreatePanel(ProjectPage _projectPage)
+        {
+            Panels newPanel = new Panels() { ProjectId = _projectPage.projects.ProjectId, PanelAuthorId = Convert.ToInt32(User.Identity.Name), PanelName = _projectPage.panels.PanelName };
+            db.Panels.Add(newPanel);
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = _projectPage.projects.ProjectId });
+        }
+
+        [Authorize]
+        public ActionResult DeletePanel(int _panelId)
+        {
+            int? projectId = db.Panels.FirstOrDefault(x => x.PanelId == _panelId).ProjectId;
+
+            db.Panels.Remove(db.Panels.FirstOrDefault(x => x.PanelId == _panelId));
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = projectId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreateTask(ProjectPage _projectPage)
+        {
+            string sql = String.Format("select PanelId from Panels where ProjectId = {0}", _projectPage.projects.ProjectId);
+            Panels panel = db.Panels.FirstOrDefault(x => x.ProjectId == _projectPage.projects.ProjectId);
+
+            if (panel == null)
+                return RedirectToAction("Proje", new { id = _projectPage.projects.ProjectId });
+
+            Tasks newTask = new Tasks()
+            {
+                PanelId = panel.PanelId,
+                UserId = Convert.ToInt32(User.Identity.Name),
+                TaskStartDate = DateTime.Now,
+                TaskDescription = _projectPage.tasks.TaskDescription,
+                TaskNotes = _projectPage.tasks.TaskNotes
+            };
+            db.Tasks.Add(newTask);
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = _projectPage.projects.ProjectId });
+        }
+
+        [Authorize]
+        public ActionResult DeleteTask(int _taskId)
+        {
+            int? panelId = db.Tasks.FirstOrDefault(x => x.TaskId == _taskId).PanelId;
+            int? projectId = db.Panels.FirstOrDefault(x => x.PanelId == panelId).ProjectId;
+
+            db.Tasks.Remove(db.Tasks.FirstOrDefault(x => x.TaskId == _taskId));
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = projectId });
         }
     }
 }
