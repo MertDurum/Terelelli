@@ -151,6 +151,8 @@
     <Compile Include="Models\Entity\Panels.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\ProfilePage.cs" />
+    <Compile Include="Models\Entity\ProjectPage.cs" />
     <Compile Include="Models\Entity\Projects.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿
+﻿@model Terelelli.Models.Entity.ProjectPage
+
 @{
     ViewBag.Title = "Proje";
 }
@@ -180,7 +181,6 @@
         <!--LİSTE-->
         <div class="col-3">
             <div class="card bg-white border-0 liste shadow">
-
                 <!--Liste Adı / Header-->
                 <div class="card-header shadow bg-dark text-white d-inline-flex mb-1">
                     TODO
@@ -199,9 +199,7 @@
 
                 <!--Listedeki Görevler-->
                 <div>
-
                     <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
-
                         <div class="dropdown">
                             <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
@@ -212,122 +210,9 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
-
-                        <div class="dropdown">
-                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
-
-                        <div class="dropdown">
-                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="card-body rounded shadow m-1 border d-inline-flex" draggable="true">
-
-                        <div class="dropdown">
-                            <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div>Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</div>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li><button class="dropdown-item" type="button">Görüntüle</button></li>
-                                <li><button class="dropdown-item" type="button">Düzenle</button></li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
-
-
             </div>
         </div>
-
-        <!---///////////////////////////////////////////////////////////////////////////////--->
-        
-    <!--Bunlar sâfi rüzgar .. bunları sil-->
-        <div class="col-3">
-            <div class="card bg-white border-0 liste shadow-lg">
-                <div class="card-header bg-dark text-white">TODO</div>
-
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
-
-            </div>
-        </div>
-
-        <div class="col-3">
-            <div class="card bg-white border-0 liste shadow-lg">
-                <div class="card-header bg-dark text-white">TODO</div>
-
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item4</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item5</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item6</div>
-
-            </div>
-        </div>
-
-        <div class="col-3">
-            <div class="card bg-white border-0 liste">
-                <div class="card-header bg-dark text-white">TODO</div>
-
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-
-            </div>
-        </div>
-
-        <div class="col-3">
-            <div class="card bg-white border-0 liste">
-                <div class="card-header bg-dark text-white">TODO</div>
-
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-
-            </div>
-        </div>
-
-        <div class="col-3">
-            <div class="card bg-white border-0 liste">
-                <div class="card-header bg-dark text-white">TODO</div>
-
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-
-            </div>
-        </div>
-
-        <div class="col-3">
-            <div class="card bg-white border-0 liste">
-                <div class="card-header bg-dark text-white">TODO</div>
-
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-                <div class="card-body rounded shadow-sm mb-2 border" draggable="true">item1</div>
-
-            </div>
-        </div>
-
-
     </div>
     
 </div>

@@ -75,9 +75,18 @@ namespace Terelelli.Controllers
             return View();
         }
 
-
-        public ActionResult Proje()
+        [Authorize]
+        public ActionResult Proje(int? id)
         {
+            if (id == null)
+                return RedirectToAction("Profil");
+
+            // if user does not exist in this project, return to profile screen.
+            var p = db.ProjectUsers.FirstOrDefault(x => x.ProjectId == id && x.UserId.ToString() == User.Identity.Name);
+            if (p == null)
+                return RedirectToAction("Profil");
+
+            ViewBag.text = id.ToString();
             return View();
         }
 
@@ -104,14 +113,14 @@ namespace Terelelli.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult CreateProject(Projects _project)
+        public ActionResult CreateProject(ProfilePage _profilePage)
         {
-            _project.ProjectAuthorId = db.Users.FirstOrDefault(x => x.UserId.ToString() == User.Identity.Name).UserId;
-            _project.ProjectStartDate = DateTime.Now;
-            db.Projects.Add(_project);
+            _profilePage.projects.ProjectAuthorId = db.Users.FirstOrDefault(x => x.UserId.ToString() == User.Identity.Name).UserId;
+            _profilePage.projects.ProjectStartDate = DateTime.Now;
+            db.Projects.Add(_profilePage.projects);
             db.SaveChanges();
 
-            ProjectUsers PU = new ProjectUsers() { ProjectId = _project.ProjectId, UserId = Convert.ToInt32(User.Identity.Name) };
+            ProjectUsers PU = new ProjectUsers() { ProjectId = _profilePage.projects.ProjectId, UserId = Convert.ToInt32(User.Identity.Name) };
             db.ProjectUsers.Add(PU);
             db.SaveChanges();
 
@@ -120,19 +129,19 @@ namespace Terelelli.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult JoinProject(Projects _project)
+        public ActionResult JoinProject(ProfilePage _profilePage)
         {
-            var p = db.Projects.FirstOrDefault(x => x.ProjectId == _project.ProjectId);
+            var p = db.Projects.FirstOrDefault(x => x.ProjectId == _profilePage.projects.ProjectId);
             
             // if project exists => add the user to the projectusers relationship table
             if (p != null)
             {
                 // if user is not a nember of this project, add them
-                var pu = db.ProjectUsers.FirstOrDefault(x => x.ProjectId == _project.ProjectId && x.UserId.ToString() == User.Identity.Name);
+                var pu = db.ProjectUsers.FirstOrDefault(x => x.ProjectId == _profilePage.projects.ProjectId && x.UserId.ToString() == User.Identity.Name);
 
                 if (pu == null)
                 {
-                    pu = new ProjectUsers() { ProjectId = _project.ProjectId, UserId = Convert.ToInt32(User.Identity.Name) };
+                    pu = new ProjectUsers() { ProjectId = _profilePage.projects.ProjectId, UserId = Convert.ToInt32(User.Identity.Name) };
                     db.ProjectUsers.Add(pu);
                     db.SaveChanges();
                 }

@@ -1,4 +1,4 @@
-﻿@model Terelelli.Models.Entity.UserEntity
+﻿@model Terelelli.Models.Entity.Users
 @{
     ViewBag.Title = "Register";
 }
@@ -17,15 +17,15 @@
                         <label>@ViewBag.Message</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">E-Mail</span>
-                            @Html.TextBoxFor(m => m.email)
+                            @Html.TextBoxFor(m => m.UserMail)
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Kullanıcı Adı</span>
-                            @Html.TextBoxFor(m => m.name)
+                            @Html.TextBoxFor(m => m.UserName)
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Şifre</span>
-                            @Html.TextBoxFor(m => m.password)
+                            @Html.TextBoxFor(m => m.UserPassword)
                         </div>
                     </div>
                 </div>

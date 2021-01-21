@@ -1,7 +1,8 @@
-﻿@model Terelelli.Models.Entity.Projects
+﻿@model Terelelli.Models.Entity.ProfilePage
 
 @{
     ViewBag.Title = "Profil";
+    Terelelli.Models.Entity.ProfilePage data = new Terelelli.Models.Entity.ProfilePage();
 }
 
 <div class="container-fluid mt-lg-3 mt-md-3 mt-sm-2">
@@ -45,8 +46,11 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">Proje Adı</span>
                                                     @*<input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">*@
-                                                    @Html.TextBoxFor(m => m.ProjectName);
+                                                    @Html.TextBoxFor(m => m.projects.ProjectName)
                                                 </div>
+                                                    <div class="input-group mb-3">
+                                                        <label class="input-group-text" for="inputGroupSelect01">Proje Zorluğu Seç</label>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +82,7 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">Proje Kodu Giriniz</span>
                                                     @*<input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">*@
-                                                    @Html.TextBoxFor(m => m.ProjectId);
+                                                    @Html.TextBoxFor(m => m.projects.ProjectId);
                                                 </div>
                                             </div>
                                         </div>
@@ -103,32 +107,17 @@
     <!--Projeler-->
     <div class="row mt-lg-3 mt-md-3 mt-sm-2 proje">
         <h4>Projeler</h4>
-        <div class="card m-1" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">*Proje Adı*</h5>
-                <p class="card-text">*Proje Açıklaması*</p>
-                <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a>
-            </div>
-        </div>
-        
-        @*  
-        <div class="card m-1" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">*Proje Adı*</h5>
-                <p class="card-text">*Proje Açıklaması*</p>
-                <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a>
-            </div>
-        </div>
 
-        <div class="card m-1" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">*Proje Adı*</h5>
-                <p class="card-text">*Proje Açıklaması*</p>
-                <a href="#" class="btn btn-dark" style="opacity:0.9;">Giriş</a> 
+        @foreach (var p in data.UserProjects(User.Identity.Name))
+        {
+            <div class="card m-1" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@p.ProjectName</h5>
+                    <p class="card-text">@p.ProjectStartDate</p>
+                    <a href=@Url.Action("Proje", "Home", new { id = p.ProjectId }) class="btn btn-dark" style="opacity:0.9;">Giriş</a>
+                </div>
             </div>
-        </div>
-        *@
-
+        }
     </div>
 </div>
 
