@@ -25,7 +25,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Şifre</span>
-                            @Html.TextBoxFor(m => m.UserPassword, new { required = true })
+                            @Html.TextBoxFor(m => m.UserPassword, new { @type = "password", required = true })
                         </div>
                     </div>
                 </div>
