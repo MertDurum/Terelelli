@@ -17,9 +17,10 @@ namespace Terelelli.Models.Entity
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> TaskId { get; set; }
-        public Nullable<System.DateTime> CompletionTime { get; set; }
+        public Nullable<long> CompletionTime { get; set; }
     
         public virtual Tasks Tasks { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Tasks Tasks1 { get; set; }
     }
 }

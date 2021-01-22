@@ -26,12 +26,12 @@ namespace Terelelli.Models.Entity
         }
     
         public virtual DbSet<Panels> Panels { get; set; }
-        public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<ProjectUsers> ProjectUsers { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<TaskCompletionTimes> TaskCompletionTimes { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<TaskTimes> TaskTimes { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<TaskCompletionTimes> TaskCompletionTimes { get; set; }
+        public virtual DbSet<Projects> Projects { get; set; }
     }
 }

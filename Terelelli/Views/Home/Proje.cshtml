@@ -140,11 +140,11 @@
     </div>
 </div>
 
-        <!--PANOLAR VE GÖREVLER BÖLÜMÜ-->
+ <!--PANOLAR VE GÖREVLER BÖLÜMÜ-->
 <div class="container-fluid mt-3">
 
-            <!--PANOLAR-->
-    <div class="row g-4 testimonial-group">
+    <!--PANOLAR-->
+    <div class="row g-4 testimonial-group" style="height: 700px;">
         @foreach (var p in data.ProjectPanels(ViewBag.projectId))
         {
             Terelelli.Models.Entity.Panels currentPanel = p;
@@ -170,7 +170,7 @@
                     @foreach (var t in data.PanelTasks(currentPanel.PanelId.ToString()))
                     {
                         <div>
-                            <div class="card-body rounded shadow m-1 border" draggable="true">
+                            <div class="card-body rounded shadow m-1 border" style="@( (t.TaskFinishDate == null) ? "background-color:#ffffff": "background-color:#809680" )" draggable="true">
                                 <div class="dropdown">
                                     <button class="btn btn-link text-reset ms-auto text-start" style="right:0; top:0;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div>@t.TaskDescription</div>
@@ -198,6 +198,10 @@
                                     {
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Görev Düzenleme</h5>
+                                            @if(t.TaskFinishDate != null)
+                                            {
+                                                <h6 class="modal-title" id="staticBackdropLabel">(Tamamlandı: @t.TaskFinishDate)</h6>
+                                            }
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
 
@@ -207,12 +211,12 @@
                                                     <div class="col">
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1">Kart No</span>
-                                                            <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1" value=@t.TaskId disabled>
+                                                            <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1" value="@t.TaskId" disabled>
                                                         </div>
 
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1">Proje No</span>
-                                                            <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1" value=@ViewBag.projectId disabled>
+                                                            <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1" value="@ViewBag.projectId" disabled>
                                                         </div>
 
                                                         <div class="input-group mb-3">
@@ -227,17 +231,17 @@
 
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1">Tarih</span>
-                                                            <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1" value=@t.TaskStartDate disabled>
+                                                            <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1" value="@(((DateTime)t.TaskStartDate).ToString("MM/dd/yyyy-HH:mm"))" disabled>
                                                         </div>
 
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
-                                                            <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1" disabled>
+                                                            <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1" value="@t.TaskEstimatedDuration dk" disabled>
                                                         </div>
 
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
-                                                            <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1" disabled>
+                                                            <span class="input-group-text" id="basic-addon1">Geçen Süre</span>
+                                                            <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1" value="@data.TaskDuration(t.TaskId.ToString())" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,6 +266,14 @@
                                         </div>
 
                                         <div class="modal-footer">
+                                            @if (t.TaskFinishDate == null)
+                                            {
+                                                <button type="button" class="btn btn-dark" onclick="location.href = '@Url.Action("FinishTask", "Home", new { _projectId = ViewBag.projectId, _taskId = t.TaskId })'">Tamamlandı Olarak İşaretle</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-dark" onclick="location.href = '@Url.Action("UnfinishTask", "Home", new { _projectId = ViewBag.projectId, _taskId = t.TaskId })'">Tamamlanmadı Olarak İşaretle</button>
+                                            }
                                             <button type="submit" class="btn btn-dark">Görevi Güncelle</button>
                                         </div>
                                     }

@@ -18,6 +18,7 @@ namespace Terelelli.Models.Entity
         public Tasks()
         {
             this.TaskCompletionTimes = new HashSet<TaskCompletionTimes>();
+            this.TaskCompletionTimes1 = new HashSet<TaskCompletionTimes>();
         }
     
         public int TaskId { get; set; }
@@ -26,11 +27,14 @@ namespace Terelelli.Models.Entity
         public Nullable<System.DateTime> TaskStartDate { get; set; }
         public string TaskDescription { get; set; }
         public string TaskNotes { get; set; }
-        public Nullable<short> TaskDifficulty { get; set; }
+        public Nullable<System.DateTime> TaskFinishDate { get; set; }
+        public Nullable<long> TaskEstimatedDuration { get; set; }
     
         public virtual Panels Panels { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskCompletionTimes> TaskCompletionTimes { get; set; }
-        public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskCompletionTimes> TaskCompletionTimes1 { get; set; }
     }
 }

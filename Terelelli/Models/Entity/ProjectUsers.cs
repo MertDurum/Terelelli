@@ -18,7 +18,7 @@ namespace Terelelli.Models.Entity
         public Nullable<int> ProjectId { get; set; }
         public Nullable<int> UserId { get; set; }
     
-        public virtual Projects Projects { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Projects Projects { get; set; }
     }
 }

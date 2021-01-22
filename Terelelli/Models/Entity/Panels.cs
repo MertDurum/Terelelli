@@ -25,9 +25,9 @@ namespace Terelelli.Models.Entity
         public int PanelAuthorId { get; set; }
         public string PanelName { get; set; }
     
-        public virtual Projects Projects { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tasks> Tasks { get; set; }
+        public virtual Projects Projects { get; set; }
     }
 }

@@ -33,5 +33,24 @@ namespace Terelelli.Models.Entity
             Users u = db.Users.FirstOrDefault(x => x.UserId.ToString() == _userId);
             return u;
         }
+
+        public string TaskDuration(string _taskId)
+        {
+            Tasks t = db.Tasks.FirstOrDefault(x => x.TaskId.ToString() == _taskId);
+            
+            if (t.TaskFinishDate != null)
+            {
+                return db.TaskCompletionTimes.FirstOrDefault(x => x.TaskId.ToString() == _taskId).CompletionTime + " dk";
+            }
+
+            return (DateTime.Now - t.TaskStartDate).Value.Minutes + " dk";
+        }
+
+        public string EstimatedTaskDuration(string _taskId)
+        {
+            var tct = db.TaskCompletionTimes.FirstOrDefault(x => x.TaskId.ToString() == _taskId);
+
+            return null;
+        }
     }
 }

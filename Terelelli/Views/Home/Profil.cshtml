@@ -47,9 +47,6 @@
                                                     @*<input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1">*@
                                                     @Html.TextBoxFor(m => m.projects.ProjectName)
                                                 </div>
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text" for="inputGroupSelect01">Proje Zorluğu Seç</label>
-                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -114,6 +111,10 @@
                     <h5 class="card-title">@p.ProjectName</h5>
                     <p class="card-text">@p.ProjectStartDate</p>
                     <a href=@Url.Action("Proje", "Home", new { id = p.ProjectId }) class="btn btn-dark" style="opacity:0.9;">Giriş</a>
+                    @if (data.GetProjectAuthorId(p.ProjectId).ToString() == User.Identity.Name)
+                    {
+                        <a class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');" href=@Url.Action("DeleteProject", "Home", new { _projectId = p.ProjectId }) style="opacity:0.9;">Sil</a>
+                    }
                 </div>
             </div>
         }

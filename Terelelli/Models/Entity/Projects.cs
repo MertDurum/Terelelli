@@ -25,7 +25,6 @@ namespace Terelelli.Models.Entity
         public Nullable<int> ProjectAuthorId { get; set; }
         public Nullable<System.DateTime> ProjectStartDate { get; set; }
         public string ProjectName { get; set; }
-        public Nullable<short> ProjectDifficulty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Panels> Panels { get; set; }

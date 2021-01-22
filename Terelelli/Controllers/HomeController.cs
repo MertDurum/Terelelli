@@ -127,6 +127,30 @@ namespace Terelelli.Controllers
             db.ProjectUsers.Add(PU);
             db.SaveChanges();
 
+            // Add 5 default panels to the project.
+            string[] panelNames = { "Todo", "In Progress", "Revision", "Check", "Done" };
+            for (int i = 0; i < 5; i++)
+            {
+                Panels P = new Panels()
+                {
+                    ProjectId = _profilePage.projects.ProjectId,
+                    PanelAuthorId = Convert.ToInt32(User.Identity.Name),
+                    PanelName = panelNames[i]
+                };
+                db.Panels.Add(P);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Profil");
+        }
+
+        [Authorize]
+        public ActionResult DeleteProject(int _projectId)
+        {
+            Projects p = db.Projects.FirstOrDefault(x => x.ProjectId == _projectId);
+            db.Projects.Remove(p);
+            db.SaveChanges();
+
             return RedirectToAction("Profil");
         }
 
@@ -136,7 +160,7 @@ namespace Terelelli.Controllers
         {
             var p = db.Projects.FirstOrDefault(x => x.ProjectId == _profilePage.projects.ProjectId);
             
-            // if project exists => add the user to the projectusers relationship table
+            // if project exists => add the user to the projectusers table
             if (p != null)
             {
                 // if user is not a nember of this project, add them
@@ -181,11 +205,22 @@ namespace Terelelli.Controllers
         [HttpPost]
         public ActionResult CreateTask(ProjectPage _projectPage)
         {
-            string sql = String.Format("select PanelId from Panels where ProjectId = {0}", _projectPage.projects.ProjectId);
             Panels panel = db.Panels.FirstOrDefault(x => x.ProjectId == _projectPage.projects.ProjectId);
 
             if (panel == null)
                 return RedirectToAction("Proje", new { id = _projectPage.projects.ProjectId });
+
+            // Calculate estimated time
+            var completedProjects = db.TaskCompletionTimes.FirstOrDefault(x => x.UserId == _projectPage.tasks.UserId);
+
+            if (completedProjects != null)
+            {
+                _projectPage.tasks.TaskEstimatedDuration = (long)db.TaskCompletionTimes.Average(x => x.CompletionTime);
+            }
+            else
+            {
+                _projectPage.tasks.TaskEstimatedDuration = 24 * 60;
+            }
 
             Tasks newTask = new Tasks()
             {
@@ -193,7 +228,8 @@ namespace Terelelli.Controllers
                 UserId = _projectPage.tasks.UserId,
                 TaskStartDate = DateTime.Now,
                 TaskDescription = _projectPage.tasks.TaskDescription,
-                TaskNotes = _projectPage.tasks.TaskNotes
+                TaskNotes = _projectPage.tasks.TaskNotes,
+                TaskEstimatedDuration = _projectPage.tasks.TaskEstimatedDuration
             };
             db.Tasks.Add(newTask);
             db.SaveChanges();
@@ -224,6 +260,39 @@ namespace Terelelli.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Proje", new { id = _projectPage.projects.ProjectId });
+        }
+
+        [Authorize]
+        public ActionResult FinishTask(int _projectId, int _taskId)
+        {
+            Tasks t = db.Tasks.FirstOrDefault(x => x.TaskId == _taskId);
+            t.TaskFinishDate = DateTime.Now;
+            db.SaveChanges();
+
+            TaskCompletionTimes tct = new TaskCompletionTimes()
+            {
+                TaskId = t.TaskId,
+                UserId = t.UserId,
+                CompletionTime = (t.TaskFinishDate - t.TaskStartDate).Value.Minutes
+            };
+            db.TaskCompletionTimes.Add(tct);
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = _projectId });
+        }
+
+        [Authorize]
+        public ActionResult UnfinishTask(int _projectId, int _taskId)
+        {
+            Tasks t = db.Tasks.FirstOrDefault(x => x.TaskId == _taskId);
+            t.TaskFinishDate = null;
+            db.SaveChanges();
+
+            TaskCompletionTimes tct = db.TaskCompletionTimes.FirstOrDefault(x => x.TaskId == _taskId);
+            db.TaskCompletionTimes.Remove(tct);
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = _projectId });
         }
 
         [Authorize]
