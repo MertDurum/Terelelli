@@ -49,7 +49,8 @@
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
                                             @*<input type="text" class="form-control" aria-label="Teknik_Uzman" aria-describedby="basic-addon1">*@
-                                            @Html.TextBoxFor(m => m.tasks.UserId, new { required = true })
+                                            @*@Html.TextBoxFor(m => m.tasks.UserId, new { required = true })*@
+                                            @Html.DropDownListFor(m => m.tasks.UserId, (SelectList)ViewBag.projectUsers)
                                             @Html.HiddenFor(m => m.projects.ProjectId, new { Value = ViewBag.projectId })
                                         </div>
 
@@ -121,7 +122,7 @@
                                     <div class="col">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">Pano Adı Giriniz</span>
-                                            @Html.TextBoxFor(m => m.panels.PanelName)
+                                            @Html.TextBoxFor(m => m.panels.PanelName, new { required = true })
                                             @Html.HiddenFor(m => m.projects.ProjectId, new { Value = ViewBag.projectId })
                                         </div>
                                     </div>
@@ -165,9 +166,9 @@
 
                         </div>
                     </div>
-                    @foreach(var t in data.PanelTasks(currentPanel.PanelId.ToString()))
+                    <!--Panodaki Görevler-->
+                    @foreach (var t in data.PanelTasks(currentPanel.PanelId.ToString()))
                     {
-                        <!--Panodaki Görevler-->
                         <div>
                             <div class="card-body rounded shadow m-1 border" draggable="true">
                                 <div class="dropdown">
@@ -175,9 +176,95 @@
                                         <div>@t.TaskDescription</div>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <li><button class="dropdown-item" type="button">Görüntüle</button></li>
+                                        <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#task-@t.TaskId">Görüntüle</button></li>
                                         <li><button class="dropdown-item" type="button" onclick="location.href = '@Url.Action("DeleteTask", "Home", new { _taskId = t.TaskId })'">Sil</button></li>
+                                        @foreach (var p2 in data.ProjectPanels(ViewBag.projectId))
+                                        {
+                                            if (p2.PanelId != p.PanelId)
+                                            {
+                                                <li><button class="dropdown-item" type="button" onclick="location.href = '@Url.Action("MoveTask", "Home", new { _taskId = t.TaskId, _panelId = p2.PanelId })'">@p2.PanelName'e Taşı</button></li>
+                                            }
+                                        }
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Görev Düzenleme Modalı-->
+                        <div class="modal fade" id="task-@t.TaskId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    @using (Html.BeginForm("UpdateTask", "Home", FormMethod.Post))
+                                    {
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Görev Düzenleme</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="container ">
+                                                <div class="row ">
+                                                    <div class="col">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Kart No</span>
+                                                            <input type="text" class="form-control" aria-label="Kart_No" aria-describedby="basic-addon1" value=@t.TaskId disabled>
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Proje No</span>
+                                                            <input type="text" class="form-control" aria-label="Proje_No" aria-describedby="basic-addon1" value=@ViewBag.projectId disabled>
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Teknik Uzman</span>
+                                                            @Html.DropDownListFor(m => m.tasks.UserId, (SelectList)ViewBag.projectUsers, data.UserFromId(t.UserId.ToString()))
+                                                            @Html.HiddenFor(m => m.projects.ProjectId, new { Value = ViewBag.projectId })
+                                                            @Html.HiddenFor(m => m.tasks.TaskId, new { Value = t.TaskId })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col">
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Tarih</span>
+                                                            <input type="text" class="form-control" aria-label="Tarih" aria-describedby="basic-addon1" value=@t.TaskStartDate disabled>
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Tahmini Süre</span>
+                                                            <input type="text" class="form-control" aria-label="Tahmini_Süre" aria-describedby="basic-addon1" disabled>
+                                                        </div>
+
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">Gerçekleşen Süre</span>
+                                                            <input type="text" class="form-control" aria-label="Gerçekleşen_Süre" aria-describedby="basic-addon1" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">Açıklama</span>
+                                                        @*<textarea class="form-control" aria-label="Açıklama"></textarea>*@
+                                                        @Html.TextAreaFor(m => m.tasks.TaskDescription, new { @class = "form-control", @placeholder = t.TaskDescription })
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">Not</span>
+                                                        @*<textarea class="form-control" aria-label="Not"></textarea>*@
+                                                        @Html.TextAreaFor(m => m.tasks.TaskNotes, new { @class = "form-control", @placeholder = t.TaskNotes })
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-dark">Görevi Güncelle</button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

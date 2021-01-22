@@ -27,5 +27,11 @@ namespace Terelelli.Models.Entity
             var tasks = db.Tasks.SqlQuery(query).ToList<Tasks>();
             return tasks;
         }
+
+        public Users UserFromId(string _userId)
+        {
+            Users u = db.Users.FirstOrDefault(x => x.UserId.ToString() == _userId);
+            return u;
+        }
     }
 }

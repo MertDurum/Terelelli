@@ -86,6 +86,9 @@ namespace Terelelli.Controllers
             if (p == null)
                 return RedirectToAction("Profil");
 
+            var users = db.ProjectUsers.Where(x => x.ProjectId == id).Select(x => x.Users).ToList();
+
+            ViewBag.projectUsers = new SelectList(users, "UserId", "UserName");
             ViewBag.projectId = id.ToString();
             return View();
         }
@@ -187,7 +190,7 @@ namespace Terelelli.Controllers
             Tasks newTask = new Tasks()
             {
                 PanelId = panel.PanelId,
-                UserId = Convert.ToInt32(User.Identity.Name),
+                UserId = _projectPage.tasks.UserId,
                 TaskStartDate = DateTime.Now,
                 TaskDescription = _projectPage.tasks.TaskDescription,
                 TaskNotes = _projectPage.tasks.TaskNotes
@@ -205,6 +208,31 @@ namespace Terelelli.Controllers
             int? projectId = db.Panels.FirstOrDefault(x => x.PanelId == panelId).ProjectId;
 
             db.Tasks.Remove(db.Tasks.FirstOrDefault(x => x.TaskId == _taskId));
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = projectId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult UpdateTask(ProjectPage _projectPage)
+        {
+            var t = db.Tasks.FirstOrDefault(x => x.TaskId == _projectPage.tasks.TaskId);
+            t.UserId = _projectPage.tasks.UserId;
+            t.TaskDescription = String.IsNullOrEmpty(_projectPage.tasks.TaskDescription) ? t.TaskDescription : _projectPage.tasks.TaskDescription;
+            t.TaskNotes = String.IsNullOrEmpty(_projectPage.tasks.TaskNotes) ? t.TaskNotes : _projectPage.tasks.TaskNotes;
+            db.SaveChanges();
+
+            return RedirectToAction("Proje", new { id = _projectPage.projects.ProjectId });
+        }
+
+        [Authorize]
+        public ActionResult MoveTask(int _taskId, int _panelId)
+        {
+            int? projectId = db.Panels.FirstOrDefault(x => x.PanelId == _panelId).ProjectId;
+
+            // move task to the new panel
+            db.Tasks.FirstOrDefault(x => x.TaskId == _taskId).PanelId = _panelId;
             db.SaveChanges();
 
             return RedirectToAction("Proje", new { id = projectId });

@@ -17,15 +17,15 @@
                         <label>@ViewBag.Message</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">E-Mail</span>
-                            @Html.TextBoxFor(m => m.UserMail)
+                            @Html.TextBoxFor(m => m.UserMail, new { required = true })
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Kullanıcı Adı</span>
-                            @Html.TextBoxFor(m => m.UserName)
+                            @Html.TextBoxFor(m => m.UserName, new { required = true })
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Şifre</span>
-                            @Html.TextBoxFor(m => m.UserPassword)
+                            @Html.TextBoxFor(m => m.UserPassword, new { required = true })
                         </div>
                     </div>
                 </div>
